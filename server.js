@@ -1,11 +1,12 @@
 const { PeerServer } = require('peer');
 
-// Запускаем сервер на порту, который выдаст хостинг (или 9000 локально)
+// Хостинг сам назначит порт в process.env.PORT, а локально будет 9000
 const port = process.env.PORT || 9000;
 
 const peerServer = PeerServer({ 
   port: port, 
-  path: '/myapp' 
+  path: '/myapp',
+  allow_discovery: true // Помогает браузерам находить ID друг друга
 });
 
-console.log(`Сигнальный сервер PeerJS успешно запущен на порту ${port}`);
+console.log(`Сигнальный сервер запущен на порту ${port}`);
