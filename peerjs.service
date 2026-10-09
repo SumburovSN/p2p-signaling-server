@@ -1,0 +1,17 @@
+#/etc/systemd/system/peerjs.service
+[Unit]
+Description=PeerJS Signaling Server
+After=network.target
+
+[Service]
+Type=simple
+User=peerjs
+Group=peerjs
+WorkingDirectory=/opt/p2p-signaling-server
+ExecStart=/usr/bin/npm start
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
