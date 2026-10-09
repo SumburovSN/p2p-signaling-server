@@ -209,7 +209,7 @@ enabled
 ```text
 Интернет
    ↓ HTTPS / WSS
-sumburovsn.fvds.ru:443
+твой_домен:443
    ↓
 Nginx
    ↓ HTTP
@@ -228,7 +228,7 @@ server {
     listen 80;
     listen [::]:80;
 
-    server_name sumburovsn.fvds.ru;
+    server_name твой_домен;
 
     location /myapp/ {
         proxy_pass http://127.0.0.1:9000/myapp/;
@@ -304,7 +304,7 @@ HTTP/1.1 200 OK
 ```
 
 ```console
-sudo certbot --nginx -d sumburovsn.fvds.ru
+sudo certbot --nginx -d твой_домен
 ```
 
 ### 7. Следующий шаг — установка coturn
@@ -346,7 +346,7 @@ tls-listening-port=5349
 # ==========================================
 
 lt-cred-mech
-realm=sumburovsn.fvds.ru
+realm=твой_домен
 
 # ==========================================
 # Relay ports
@@ -359,8 +359,8 @@ max-port=49200
 # TLS
 # ==========================================
 
-cert=/etc/letsencrypt/live/sumburovsn.fvds.ru/fullchain.pem
-pkey=/etc/letsencrypt/live/sumburovsn.fvds.ru/privkey.pem
+cert=/etc/letsencrypt/live/твой_домен/fullchain.pem
+pkey=/etc/letsencrypt/live/твой_домен/privkey.pem
 
 # ==========================================
 # Безопасность
@@ -420,8 +420,8 @@ sudo chmod 750 /etc/coturn/certs
 ```
 #### 8.2. Копируем сертификаты
 ```console
-sudo cp /etc/letsencrypt/live/sumburovsn.fvds.ru/fullchain.pem /etc/coturn/certs/fullchain.pem
-sudo cp /etc/letsencrypt/live/sumburovsn.fvds.ru/privkey.pem /etc/coturn/certs/privkey.pem
+sudo cp /etc/letsencrypt/live/твой_домен/fullchain.pem /etc/coturn/certs/fullchain.pem
+sudo cp /etc/letsencrypt/live/твой_домен/privkey.pem /etc/coturn/certs/privkey.pem
 ```
 #### 8.3. Выставляем права:
 ```console
@@ -494,7 +494,7 @@ pkey=/etc/coturn/certs/privkey.pem
 ```еуче
 Let's Encrypt
     ↓
-/etc/letsencrypt/live/sumburovsn.fvds.ru/
+/etc/letsencrypt/live/твой_домен/
     ├── fullchain.pem
     └── privkey.pem
 
@@ -534,7 +534,7 @@ sudo nano /etc/letsencrypt/renewal-hooks/deploy/coturn-cert.sh
 #!/bin/bash
 
 CERT_DIR="/etc/coturn/certs"
-LE_DIR="/etc/letsencrypt/live/sumburovsn.fvds.ru"
+LE_DIR="/etc/letsencrypt/live/твой_домен"
 
 echo "Updating coturn certificates..."
 
